@@ -1,0 +1,15 @@
+define({
+  "name": "WebTailors Mail Proxy",
+  "version": "1.0.0",
+  "description": "V1 API Documentation for WebTailors Mail Proxy",
+  "title": "API Documentation for WebTailors Mail Proxy",
+  "url": "http://wtmailproxy.wtlr.me/api",
+  "sampleUrl": false,
+  "apidoc": "0.2.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2016-01-31T22:04:52.363Z",
+    "url": "http://apidocjs.com",
+    "version": "0.13.1"
+  }
+});

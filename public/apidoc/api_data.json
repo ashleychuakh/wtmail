@@ -1,0 +1,217 @@
+[
+  {
+    "type": "post",
+    "url": "/account/login/",
+    "title": "Login to Account",
+    "sampleRequest": [
+      {
+        "url": "/account/login/"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": true,
+            "field": "Accept",
+            "defaultValue": "application/json",
+            "description": "<p>application/json, text/plain.</p> "
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>application/x-www-form-urlencoded, raw.</p> "
+          }
+        ]
+      }
+    },
+    "version": "1.0.0",
+    "name": "PostAccountLogin",
+    "group": "Account",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "account-username",
+            "description": "<p>Username.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "account-",
+            "description": "<p>Password.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n   \"username\": \"Username\",\n   \"password\": \"Password\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "token",
+            "description": "<p>JSON Web Token generated for successful authentication.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "401/Unauthorized",
+            "description": "<p>Invalid Login Details</p> "
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "500/InternalError",
+            "description": "<p>An Internal Error has occured.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n   \"message\": \"Unauthorized\",\n   \"status_code\": 401,\n   \"debug\": {\n        \"line\": 123,\n        \"file\": \"/srv/http/www/meggnify/vendor/dingo/api/src/Auth/Auth.php\",\n        \"class\": \"Symfony\\Component\\HttpKernel\\Exception\\UnauthorizedHttpException\",\n        \"trace\": [...]\n   }\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Error Response:",
+          "content": "HTTP/1.1 500 Internal Error\n{\n   \"message\": \"Internal Error\",\n   \"status_code\": 500,\n   \"debug\": {\n        \"line\": 123,\n        \"file\": \"/srv/http/www/meggnify/vendor/dingo/api/src/Http/Response/Factory.php\",\n        \"class\": \"Symfony\\Component\\HttpKernel\\Exception\\HttpException\",\n        \"trace\": [...]\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "/srv/http/www/wtmailproxy/app/Http/Controllers/Api/v1/AccountController.php",
+    "groupTitle": "Account"
+  },
+  {
+    "type": "post",
+    "url": "/mail/send",
+    "title": "Send an Email",
+    "sampleRequest": [
+      {
+        "url": "/api/mail/send"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": true,
+            "field": "Accept",
+            "defaultValue": "application/json",
+            "description": "<p>application/json, text/plain.</p> "
+          },
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>application/x-www-form-urlencoded, raw.</p> "
+          }
+        ]
+      }
+    },
+    "version": "1.0.0",
+    "name": "PostMailSend",
+    "group": "Mail",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name of Lead.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "allowedValues": [
+              "*@*"
+            ],
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of Lead.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>Phone of Lead.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "company",
+            "description": "<p>Company of Lead.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Message of Lead.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n   \"name\": \"Zane J. Chua\",\n   \"email\": \"zane@webtailors.sg\",\n   \"phone\": \"85118687\",\n   \"company\": \"WebTailors (S) Pte Ltd\",\n   \"message\": \"HEELOOOOOOOOOOOOOOOOOOOOOOOO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 2xx": [
+          {
+            "group": "Success 2xx",
+            "optional": false,
+            "field": "201/Created",
+            "description": "<p>Account successfully created.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "/srv/http/www/wtmailproxy/app/Http/Controllers/Api/v1/MailController.php",
+    "groupTitle": "Mail"
+  }
+]
