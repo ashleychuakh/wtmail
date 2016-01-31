@@ -64,7 +64,7 @@ class MailController extends Controller {
 
 	public function postMailSend(Request $request)
 	{ 
-		$requestip = isset($request->ip) ? $request->ip : '0.0.0.0';
+		$requestip = isset($request->ip) ? $request->ip : $_SERVER['REMOTE_ADDR'];
 
 		$client = $this->auth->user();
 
@@ -86,7 +86,7 @@ class MailController extends Controller {
 
 		Mail::send('emails.contact', ['name' => $request->input("name"), 'email' => $request->input("email"), 'phone' => $request->input("phone"), 'company' => $request->input("company"), 'body' => $request->input("message")], function($message) use ($client)
 		{
-		    $message->to('zane@webtailors.sg', $client->emailname)->subject($client->emailsubject);
+		    $message->to($client->email, $client->emailname)->subject($client->emailsubject);
 		});
 
 		return $this->response->created();

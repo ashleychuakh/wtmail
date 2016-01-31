@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string("username");
             $table->string("password");
             $table->string("company");
-            $table->string("token")->index();
+            $table->string("token", 500)->index();
             $table->string("email");
             $table->string("emailname");
             $table->string("emailsubject");
