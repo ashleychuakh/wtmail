@@ -9,8 +9,6 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
   $api->post('mail/send', 'MailController@postMailSend');
   $api->post('account/login', 'AccountController@postAccountLogin');
-  
-  $api->get('test', 'AccountController@test');
 });
 
 //API Routes need to be unique.
