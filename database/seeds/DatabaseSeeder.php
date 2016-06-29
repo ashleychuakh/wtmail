@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+	protected $toTruncate = ['accounts'];
     /**
      * Run the database seeds.
      *
@@ -11,6 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserTableSeeder::class);
+    	Model::unguard();
+
+    	foreach($this->toTruncate as $table){
+    		DB::table($table)->truncate();
+    	}
+
+        $this->call('AccountsTableSeeder');
+
     }
 }

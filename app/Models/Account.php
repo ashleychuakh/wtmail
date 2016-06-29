@@ -42,11 +42,11 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
 	 */
 	public static function boot()
 	{
-	    parent::boot();
+	    // parent::boot();
 
-	    static::creating(function ($account) {
-	        $account->confirmation_token = str_random(30);
-	    });
+	    // static::creating(function ($account) {
+	    //     $account->confirmation_token = str_random(30);
+	    // });
 	}
 
 	/**
@@ -58,4 +58,21 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
 	{
 	    $this->attributes['password'] = bcrypt($password);
 	}
+	/*
+	public function setStatusAttribute($status)
+	{
+		$textstatus = "active";
+
+		switch ($status)
+		{
+			case 0:
+				$textstatus = "active";
+			break;
+			case 1:
+				$textstatus = "pending";
+			break;
+		}
+
+		$this->attributes['status'] = $textstatus;
+	}*/
 }
