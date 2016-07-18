@@ -3,12 +3,12 @@
 @include('sidenav')
 
 @section('content')
-	<div class="body-content">
+	<div class="body-content overflow-mobile">
 		<div class="row">
-			<div class="col-md-offset-2 col-md-10">
+			<div class="col m12" style="padding:0 20px">
 				<div class="readAccount">
-					<legend class="read-header">Mail Provider Details</legend>
-					<div class="readAccount-box readMailP-box">
+					<legend class="read-header">/Mail Provider Details</legend>
+					<div class="readAccount-box overflow-x-box">
 						<table class="table table-hover">
 							<thead>
 								<tr>

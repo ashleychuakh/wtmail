@@ -86,32 +86,6 @@ class MainController extends Controller
 		return redirect()->back();
 	}
 
-	public function getAccountRegister()
-	{ 
-		return view("auth.register");
-	}
-
-	public function postAccountRegister(CreateAccountRequest $request)
-	{
-		if(DB::table("accounts")->where("email", "=", $request->input("account-email"))->count() >= 1)
-		{
-
-		}
-		else
-		{
-			$account = new Account;
-			$account->firstname     = $request->input("firstname");
-			$account->username     	= $request->input("username");
-			$account->password     	= $request->input("password");
-			$account->email 	   	= $request->input("email");
-			$account->usertype 	   	= 1;
-			$account->status 	   	= 0;
-			$account->save();
-
-			return redirect('/home');
-		}
-	}
-
 	public function logout(){
 		Auth::guard("web")->logout();
 		return Redirect::to("login"); 
@@ -123,22 +97,24 @@ class MainController extends Controller
 
 	public function postCreateAccount(CreateAccountRequest $request)
 	{
-		if(DB::table("accounts")->where("email", "=", $request->input("account-email"))->count() >= 1)
+		if(DB::table("accounts")->where("email", "=", $request->input("email"))->count() >= 1)
 		{
 
 		}
 		else
 		{
-			$account = new Account;
-			$account->firstname     = $request->input("firstname");
-			$account->username     	= $request->input("username");
-			$account->password     	= Hash::make($request->input("password"));
-			$account->email 	   	= $request->input("email");
-			$account->usertype 	   	= 1;
-			$account->status 	   	= 0;
-			$account->save();
+			if(DB::table("accounts")->where($request->input("password"), "=", $request->input("password_confirmation"))){
+				$account = new Account;
+				$account->firstname     = $request->input("firstname");
+				$account->username     	= $request->input("username");
+				$account->password     	= Hash::make($request->input("password"));
+				$account->email 	   	= $request->input("email");
+				$account->usertype 	   	= 1;
+				$account->status 	   	= 0;
+				$account->save();
 
-			return redirect('/readAccount');
+				return redirect('/readAccount');
+			}
 		}
 	}
 
@@ -173,6 +149,7 @@ class MainController extends Controller
 
 	public function getRemoveAccount(Account $account){
 		$account->delete();
+		Flash::success('Account deleted');
 		return redirect()->back();
 	}
 
@@ -245,6 +222,7 @@ class MainController extends Controller
 
 	public function getRemoveClient(Client $client){
 		$client->delete();
+		Flash::success('Client deleted');
 		return redirect()->back();
 	}
 
@@ -257,7 +235,8 @@ class MainController extends Controller
 	*/
 
 	public function getCreateLead(){
-		return view("lead.createLead");
+		$clients = Client::all();
+		return view("lead.createLead", compact("clients"));
 	}
 
 	public function postCreateLead(CreateLeadRequest $request) {
@@ -293,7 +272,8 @@ class MainController extends Controller
 	}
 
 	public function getUpdateLead(Lead $lead){
-		return view("lead.updateLead", compact("lead"));
+		$clients = Client::all();
+		return view("lead.updateLead", compact("lead", "clients"));
 	}
 
 	public function postUpdateLead(Lead $lead, Request $request){
@@ -319,6 +299,7 @@ class MainController extends Controller
 
 	public function getRemoveLead(Lead $lead){
 		$lead->delete();
+		Flash::success('Lead deleted');
 		return redirect()->back();
 	}
 
@@ -400,6 +381,7 @@ class MainController extends Controller
 
 	public function getRemoveMailProvider(MailProvider $mailProvider){
 		$mailProvider->delete();
+		Flash::success('Mail Provider deleted');
 		return redirect()->back();
 	}
 
@@ -413,25 +395,15 @@ class MainController extends Controller
 	*/
 
 	public function getCreateTrackingData(){
-		return view("trackingData.createTrackingData");
+		$mailProviders = MailProvider::all();
+		$clients = Client::all();
+		return view("trackingData.createTrackingData", compact("mailProviders", "clients"));
 	}
 
 	public function postCreateTrackingdata(CreateTrackingDataRequest $request){
 		if(DB::table("trackingdata")->where("ipv4", "=", $request->input("ipv4"))->count() >= 1) {
 
 		} else {
-			/*if(DB::table("clients")->where("clienttoken", "=", $request->input("clienttoken"))){
-				Flash::error("Please enter a valid Client Token number");
-				return redirect("/createTrackingData");
-			}
-
-			if(DB::table("mailproviders")->where("mailproviderid", "=", $request->input("mailproviderid"))){
-				Log::info("wrong mpd");
-				Flash::error("Please enter a valid Mail Provider ID.");
-
-				return redirect("/createTrackingData");
-			}*/
-
 				$trackingdata = new TrackingData;
 
 				$trackingdata->clienttoken     		= $request->input("clienttoken");
@@ -440,7 +412,7 @@ class MainController extends Controller
 				$trackingdata->status 	   			= $request->input("status");
 				
 				$trackingdata->save();
-
+		
 				return redirect("/readTrackingData");
 		}
 	}
@@ -451,7 +423,9 @@ class MainController extends Controller
 	}
 
 	public function getUpdateTrackingData(TrackingData $trackingdata){
-		return view("trackingData.updateTrackingData", compact("trackingdata"));
+		$mailProviders = MailProvider::all();
+		$clients = Client::all();
+		return view("trackingData.updateTrackingData", compact("trackingdata", "mailProviders", "clients"));
 	}
 
 	public function postUpdateTrackingData(TrackingData $trackingdata, Request $request){
@@ -465,7 +439,7 @@ class MainController extends Controller
 
 			$trackingdata->save();
 			
-			Flash::success('Tracking DataDetails updated');
+			Flash::success('Tracking Data updated');
 			
 		} else {
 			Flash::error('Invalid Credentials');
@@ -476,6 +450,7 @@ class MainController extends Controller
 
 	public function getRemoveTrackingData(TrackingData $trackingdata){
 		$trackingdata->delete();
+		Flash::success('Tracking Data deleted');
 		return redirect()->back();
 	}
 }

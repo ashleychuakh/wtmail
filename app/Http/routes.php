@@ -4,7 +4,11 @@ Route::auth();
 
 Route::get("/", [
 	"as" => "index", 
-	"uses" => "MainController@index"
+	"uses" => "MainController@getAccountLogin"
+]);
+Route::post("/",[
+  "as" => "index",
+  "uses" => "MainController@postAccountLogin"
 ]);
 
 /*

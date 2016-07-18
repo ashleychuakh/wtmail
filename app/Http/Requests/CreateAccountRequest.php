@@ -29,7 +29,9 @@ class CreateAccountRequest extends Request {
 			'firstname' 	=> 'required',
 			'username' 		=> 'required',
 			'password'	 	=> 'required',
+			'password_confirmation' => 'required',
 			'email' 		=> 'required',
+			'usertype'		=> 'required'
 		];
 	}
 

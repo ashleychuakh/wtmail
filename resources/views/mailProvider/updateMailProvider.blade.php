@@ -3,84 +3,209 @@
 @include('sidenav')
 
 @section('content')
-	<div class="body-content">
-		<div class="row">
-			<div class="col-md-offset-2 col-md-9">
-				<legend class="read-header">Update Mail Provider</legend>
-				@include('flash::message')
-				<div class="update-box">	
-					<form class="update-form" method="post" action="/updateMailProvider/{{$mailProvider->id}}">
-						{!! csrf_field() !!}
-						<fieldset class="form-group">
-							<label>Name:</label>
-							<input class="form-control update-form-control" type="text" name="name" id="name" value="{{$mailProvider->name}}" readonly>
-						</fieldset>
+<div class="body-content">
+  <div class="row" style="padding-left:30px">
+    <legend class="read-header">/Update Mail Provider</legend>
+    @include('flash::message')
+    <div class="panel panel-default">
+        <div class="panel-body">
+           <form class="update-form" method="post" action="/updateMailProvider/{{$mailProvider->id}}">
+              {!! csrf_field() !!}
+              
+              <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Name</label>
 
-						<fieldset class="form-group">
-							<label>Driver:</label>
-							<input class="form-control update-form-control" type="text" name="driver" id="driver" value="{{$mailProvider->driver}}">
-						</fieldset>
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="name" value="{{ $mailProvider->name }}">
 
-						<fieldset class="form-group">
-							<label>Host:</label>
-							<input class="form-control update-form-control" type="text" name="host" id="host" value="{{$mailProvider->host}}">
-						</fieldset>
+                    @if ($errors->has('name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
 
-						<fieldset class="form-group">
-							<label>Port:</label>
-							<input class="form-control update-form-control" type="number" name="port" id="port" value="{{$mailProvider->port}}">
-						</fieldset>
+            <div class="form-group{{ $errors->has('driver') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Driver</label>
 
-						<fieldset class="form-group">
-							<label>Encryption:</label>
-							<input class="form-control update-form-control" type="text" name="encryption" id="encryption" value="{{$mailProvider->encryption}}">
-						</fieldset>
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="driver" value="{{ $mailProvider->driver }}">
 
-						<fieldset class="form-group">
-							<label>Username:</label>
-							<input class="form-control update-form-control" type="text" name="username" id="username" value="{{$mailProvider->username}}">
-						</fieldset>
+                    @if ($errors->has('driver'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('driver') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
 
-						<fieldset class="form-group">
-							<label>Old Password:</label>
-							<input class="form-control update-form-control" type="password" name="currentpassword" id="currentpassword">
-						</fieldset>
+            <div class="form-group{{ $errors->has('host') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Host</label>
 
-						<fieldset class="form-group">
-							<label>New Password:</label>
-							<input class="form-control update-form-control" type="password" name="newpassword" id="newpassword">
-						</fieldset>
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="host" value="{{ $mailProvider->host }}">
 
-						<fieldset class="form-group">
-							<label>Send Mail:</label>
-							<input class="form-control update-form-control" type="text" name="sendmail" id="sendmail" value="{{$mailProvider->sendmail}}">
-						</fieldset>
+                    @if ($errors->has('host'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('host') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
 
-						<fieldset class="form-group">
-							<label>Pretend:</label><br>
-							<div class="col-md-2"><input type="radio" name="pretend" value="true" required> True</div>
-                            <input type="radio" name="pretend" value="false"> False
-						</fieldset>
+            <div class="form-group{{ $errors->has('port') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Port</label>
 
-						<fieldset class="form-group">
-							<label>From E-mail:</label>
-							<input class="form-control update-form-control" type="text" name="fromemail" id="fromemail" value="{{$mailProvider->fromemail}}">
-						</fieldset>
+                <div class="col s8 m8">
+                    <input type="number" class="form-control lead-msg" name="port" value="{{ $mailProvider->port }}" maxlength="3">
 
-						<fieldset class="form-group">
-							<label>From Name:</label>
-							<input class="form-control update-form-control" type="text" name="fromname" id="fromname" value="{{$mailProvider->fromname}}">
-						</fieldset>
+                    @if ($errors->has('port'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('port') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
 
-						<fieldset class="form-group">
-							<label>Status:</label>
-							<input class="form-control update-form-control" type="text" name="status" id="status" value="{{$mailProvider->status}}">
-						</fieldset>
-						
-						<button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>  Update</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="form-group{{ $errors->has('encryption') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Encryption</label>
+
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="encryption" value="{{ $mailProvider->encryption }}" min="0">
+
+                    @if ($errors->has('encryption'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('encryption') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Username</label>
+
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="username" value="{{ $mailProvider->username }}" min="0">
+
+                    @if ($errors->has('username'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('username') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('currentpassword') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Old Password</label>
+
+                <div class="col s8 m8">
+                    <input type="password" class="form-control" name="currentpassword" id="currentpassword" required>
+
+                    @if ($errors->has('currentpassword'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('currentpassword') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('newpassword') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">New Password</label>
+
+                <div class="col s8 m8">
+                    <input type="password" class="form-control" name="newpassword" id="newpassword">
+
+                    @if ($errors->has('newpassword'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('newpassword') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('sendmail') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Send Mail</label>
+
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="sendmail" value="{{ $mailProvider->sendmail }}" min="0">
+
+                    @if ($errors->has('sendmail'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('sendmail') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('pretend') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">Pretend</label>
+
+                <div class="col s8 m8">
+                    <div class="col-md-2">
+                        <input name="group1 pretend" type="radio" id="pretend-true"  value="true"/>
+                        <label for="pretend-true">True</label>
+                    </div>                                 
+                    <div class="col-md-2">
+                        <input name="group1 pretend" type="radio" id="pretend-false"  value="false"/>
+                        <label for="pretend-false">False</label>
+                    </div>   
+                    
+                    
+
+                    @if ($errors->has('pretend'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('pretend') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('fromemail') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">From E-Mail</label>
+
+                <div class="col s8 m8">
+                    <input type="email" class="form-control" name="fromemail" value="{{ $mailProvider->fromemail }}" min="0">
+
+                    @if ($errors->has('fromemail'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('fromemail') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('fromname') ? ' has-error' : '' }}">
+                <label class="col s3 m3 control-label">From Name</label>
+
+                <div class="col s8 m8">
+                    <input type="text" class="form-control" name="fromname" value="{{ $mailProvider->fromname }}">
+
+                    @if ($errors->has('fromname'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('fromname') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+             <label class="col s3 m3 control-label">Status</label>
+
+             <div class="col s8 m8">
+                <input type="text" class="form-control" name="status" value="{{ $mailProvider->status }}">
+
+                @if ($errors->has('status'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('status') }}</strong>
+                </span>
+                @endif
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary right"><i class="fa fa-pencil-square-o"></i>  Update</button>
+    </form>
+</div>
+</div>
+</div>
 @endsection

@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@include("partials/header")
+
 
 @section('content')
 <div class="row main">

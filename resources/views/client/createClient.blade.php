@@ -6,18 +6,17 @@
 
 <div class="body-content">
     <div class="row">
-        <div class="col-md-offset-2 col-md-9">
-             <legend class="read-header">Create Client Account</legend>
+        <div class=""  style="margin-left:30px;">
+             <legend class="read-header">/CREATE CLIENT ACCOUNT</legend>
             <div class="panel panel-default">
-               
                 <div class="panel-body createclient-box">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/createClient') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Username</label>
+                            <label class="col s3 m3 control-label">Username</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="text" class="form-control" name="username" value="{{ old('username') }}">
 
                                 @if ($errors->has('username'))
@@ -29,9 +28,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Password</label>
+                            <label class="col s3 m3 control-label">Password</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="password" class="form-control" name="password">
 
                                 @if ($errors->has('password'))
@@ -43,9 +42,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Confirm Password</label>
+                            <label class="col s3 m3 control-label">Confirm Password</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="password" class="form-control" name="password_confirmation">
 
                                 @if ($errors->has('password_confirmation'))
@@ -57,9 +56,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('company') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Company</label>
+                            <label class="col s3 m3 control-label">Company</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="text" class="form-control" name="company" value="{{ old('company') }}">
 
                                 @if ($errors->has('company'))
@@ -71,9 +70,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">E-Mail Address</label>
+                            <label class="col s3 m3 control-label">E-Mail Address</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
@@ -85,9 +84,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('emailname') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Email Name</label>
+                            <label class="col s3 m3 control-label">Email Name</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="text" class="form-control" name="emailname" value="{{ old('emailname') }}">
 
                                 @if ($errors->has('emailname'))
@@ -99,9 +98,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('emailsubject') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Email Subject</label>
+                            <label class="col s3 m3 control-label">Email Subject</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="text" class="form-control" name="emailsubject" value="{{ old('emailsubject') }}">
 
                                 @if ($errors->has('emailsubject'))
@@ -113,9 +112,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('mailproviderid') ? ' has-error' : '' }}">
-                            <label class="col-md-2 control-label">Mail Provider ID</label>
+                            <label class="col s3 m3 control-label">Mail Provider ID</label>
 
-                            <div class="col-md-9">
+                            <div class="col s8 m8">
                                 <input type="number" class="form-control" name="mailproviderid" value="{{ old('mailproviderid') }}" min="0">
 
                                 @if ($errors->has('mailproviderid'))
@@ -125,15 +124,7 @@
                                 @endif
                             </div>
                         </div>
-
-                        
-
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i> Create Client Account</button>
-                        <!--<div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="submit register "><i class="fa fa-long-arrow-right"></i></button>
-                            </div>
-                        </div>-->
+                        <button type="submit" class="btn btn-primary right"><i class="fa fa-user-plus" aria-hidden="true"></i> Create Client Account</button>
                     </form>
                 </div>
             </div>

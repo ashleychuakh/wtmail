@@ -3,57 +3,128 @@
 @include('sidenav')
 
 @section('content')
-	<div class=" body-content">
-		<div class="row">
-			<div class="col-md-offset-2 col-md-9">
-				<legend class="read-header">Update Client Account</legend>
-				<div class="update-box">	
+	<div class="body-content">
+		<div class="row" style="padding-left:30px">
+				<legend class="read-header">/Update Client Account</legend>
+				<div class="panel panel-default">
+                <div class="panel-body">
 					<form class="update-form" method="post" action="/updateClient/{{$client->id}}">
 						{!! csrf_field() !!}
-						<fieldset class="form-group">
-							<label>Username:</label>
-							<input class="form-control update-form-control" type="text" name="username" id="username" value="{{$client->username}}" readonly>
-						</fieldset>
+ 						<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Username</label>
 
-						<fieldset class="form-group">
-							<label>Old Password:</label>
-							<input class="form-control update-form-control" type="password" name="currentpassword" id="currentpassword">
-						</fieldset>
+                            <div class="col s8 m8">
+                                <input disabled type="text" class="form-control" name="username" value="{{ $client->username }}">
 
-						<fieldset class="form-group">
-							<label>New Password:</label>
-							<input class="form-control update-form-control" type="password" name="newpassword" id="newpassword">
-						</fieldset>
+                                @if ($errors->has('username'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-						<fieldset class="form-group">
-							<label>Company:</label>
-							<input class="form-control update-form-control" type="text" name="company" id="company" value="{{$client->company}}">
-						</fieldset>
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Old Password</label>
 
-						<fieldset class="form-group">
-							<label>Email Address:</label>
-							<input class="form-control update-form-control" type="email" name="email" id="email" value="{{$client->email}}">
-						</fieldset>
+                            <div class="col s8 m8">
+                                <input type="password" class="form-control" name="currentpassword" id="currentpassword" required>
 
-						<fieldset class="form-group">
-							<label>Email Name:</label>
-							<input class="form-control update-form-control" type="text" name="emailname" id="emailname" value="{{$client->emailname}}">
-						</fieldset>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-						<fieldset class="form-group">
-							<label>Email Subject:</label>
-							<input class="form-control update-form-control" type="text" name="emailsubject" id="emailsubject" value="{{$client->emailsubject}}">
-						</fieldset>
+                        <div class="form-group{{ $errors->has('newpassword') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">New Password</label>
 
-						<fieldset class="form-group">
-							<label>Mail Provider ID:</label>
-							<input class="form-control update-form-control" type="number" name="mailproviderid" id="mailproviderid" value="{{$client->mailproviderid}}" min="0">
-						</fieldset>
+                            <div class="col s8 m8">
+                                <input type="password" class="form-control" name="newpassword" id="newpassword">
 
-						<button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>  Update</button>
+                                @if ($errors->has('newpassword'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('newpassword') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('company') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Company</label>
+
+                            <div class="col s8 m8">
+                                <input type="text" class="form-control" name="company" value="{{ $client->company }}">
+
+                                @if ($errors->has('company'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('company') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">E-Mail Address</label>
+
+                            <div class="col s8 m8">
+                                <input type="email" class="form-control" name="email" value="{{ $client->email }}">
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('emailname') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Email Name</label>
+
+                            <div class="col s8 m8">
+                                <input type="text" class="form-control" name="emailname" value="{{ $client->emailname }}">
+
+                                @if ($errors->has('emailname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('emailname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('emailsubject') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Email Subject</label>
+
+                            <div class="col s8 m8">
+                                <input type="text" class="form-control" name="emailsubject" value="{{ $client->emailsubject }}">
+
+                                @if ($errors->has('emailsubject'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('emailsubject') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('mailproviderid') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Mail Provider ID</label>
+
+                            <div class="col s8 m8">
+                                <input type="number" class="form-control" name="mailproviderid" value="{{ $client->mailproviderid }}" min="0">
+
+                                @if ($errors->has('mailproviderid'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('mailproviderid') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+						<button type="submit" class="btn btn-primary right"><i class="fa fa-pencil-square-o"></i>  Update</button>
 					</form>
 				</div>
-			</div>
 		</div>
 	</div>
 @endsection

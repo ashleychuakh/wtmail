@@ -3,57 +3,116 @@
 @include('sidenav')
 
 @section('content')
-	<div class="body-content">
-		<div class="row">
-			<div class="col-md-offset-2 col-md-9">
-				<legend class="read-header">Update Account</legend>
-				<div class="update-box">
-					@include('flash::message')
-					<form class="update-form" method="post" action="/updateAccount/{{$account->id}}">
-						{!! csrf_field() !!}
-						<fieldset class="form-group">
-							<label>Username:</label>
-							<input class="form-control update-form-control" type="text" name="username" id="username" value="{{$account->username}}" readonly>
-						</fieldset>
+<div class="body-content">
+  <div class="row" style="padding-left:30px">
+    <legend class="read-header">/Update Account</legend>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="">
+               @include('flash::message')
+               <form class="update-form" method="post" action="/updateAccount/{{$account->id}}">
+                  {!! csrf_field() !!}
+                  <div class="form-group">
+                    <label class="col s3 m3 control-label">First Name</label>
 
-						<fieldset class="form-group">
-							<label>Old Password:</label>
-							<input class="form-control update-form-control" type="password" name="currentpassword" id="currentpassword">
-						</fieldset>
+                    <div class="col s8 m8">
+                        <input type="text" class="form-control" name="firstname" value="{{$account->firstname}}">
 
-						<fieldset class="form-group">
-							<label>New Password:</label>
-							<input class="form-control update-form-control" type="password" name="newpassword" id="newpassword">
-						</fieldset>
+                        @if ($errors->has('username'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('firstname') }}</strong>
+                        </span>
+                        @endif
 
-						<fieldset class="form-group">
-							<label>Email Address:</label>
-							<input class="form-control update-form-control" type="email" name="email" id="email" value="{{$account->email}}">
-						</fieldset>
+                    </div>
+                </div>
 
-						<fieldset class="form-group">
-							<label>First Name:</label>
-							<input class="form-control update-form-control" type="text" name="firstname" id="firstname" value="{{$account->firstname}}">
-						</fieldset>
+                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                    <label class="col s3 m3 control-label">Username</label>
 
-						<fieldset class="form-group">
-							<label>User Type:</label><br>
-							<input class="form-control update-form-control" type="text" name="usertype" id="usertype" value="{{$account->usertype}}">
-							<!--<select class="selectpicker" name="usertype">
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>-->
-						</fieldset>
+                    <div class="col s8 m8">
+                        <input type="text" class="form-control" name="username" value="{{$account->username}}" disabled>
 
-						<fieldset class="form-group">
-							<label>Status:</label>
-							<input class="form-control update-form-control" type="text" name="status" id="status" value="{{$account->status}}">
-						</fieldset>
+                        @if ($errors->has('username'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('username') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
 
-						<button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>  Update</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-@endsection
+                <div class="form-group{{ $errors->has('currentpassword') ? ' has-error' : '' }}">
+                    <label class="col s3 m3 control-label">Old Password</label>
+
+                    <div class="col s8 m8">
+                        <input type="password" class="form-control" name="currentpassword" id="currentpassword" required>
+
+                        @if ($errors->has('currentpassword'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('currentpassword') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('newpassword') ? ' has-error' : '' }}">
+                    <label class="col s3 m3 control-label">New Password</label>
+
+                    <div class="col s8 m8">
+                        <input type="password" class="form-control" name="newpassword" id="newpassword">
+
+                        @if ($errors->has('newpassword'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('newpassword') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label class="col s3 m3 control-label">E-Mail Address</label>
+
+                    <div class="col s8 m8">
+                        <input type="email" class="form-control" name="email" value="{{ $account->email }}">
+
+                        @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('usertype') ? ' has-error' : '' }}">
+                    <label class="col s3 m3 control-label">User Type</label>
+
+                    <div class="col s8 m8">
+                                <input class="form-control" type="text" name="usertype" id="usertype" value="{{ $account->usertype }}">
+                                @if ($errors->has('usertype'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('usertype') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                            <label class="col s3 m3 control-label">Status</label>
+
+                            <div class="col s8 m8">
+                                <input class="form-control" type="text" name="status" id="status" value="{{ $account->status }}">
+                                
+                                @if ($errors->has('status'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('status') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary right"><i class="fa fa-pencil-square-o"></i>  Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endsection
